@@ -1,0 +1,45 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "process",
+            "command": "D:/Program Files/Microchip/MPLABX/v5.40/gnuBins/GnuWin32/bin/make.exe",
+            "args": [
+                "-j12",
+                "all"
+            ],
+            "problemMatcher": [
+                {
+                    "owner": "cpp",
+                    "fileLocation": ["relative", "${workspaceFolder}"],
+                    "pattern": [
+                        {
+                            "regexp": "([\\w\\.]+):(\\d+):(\\d*):\\s*(\\w+)\\s*:\\s*(.*)",
+                            "file": 0,
+                            "line": 1,
+                            "column": 2,
+                            "severity": 3,
+                            "message": 4
+                        }
+                    ],
+                    "applyTo": "allDocuments",
+                }
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Clean",
+            "type": "process",
+            "command": "D:/Program Files/Microchip/MPLABX/v5.40/gnuBins/GnuWin32/bin/make.exe",
+            "args": [
+                "clean"
+            ]
+        }
+    ]
+}
