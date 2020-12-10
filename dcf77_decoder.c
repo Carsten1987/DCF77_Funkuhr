@@ -26,53 +26,53 @@ SOFTWARE.
 Bit	Bedeutung
 20	?1?: Beginn der Zeitinformation
 21	Minute
-(Einer)	Bit f�r 1
-22	Bit f�r 2
-23	Bit f�r 4
-24	Bit f�r 8
+(Einer)	Bit für 1
+22	Bit für 2
+23	Bit für 4
+24	Bit für 8
 25	Minute
-(Zehner)	Bit f�r 10
-26	Bit f�r 20
-27	Bit f�r 40
-28	Parit�t Minute
+(Zehner)	Bit für 10
+26	Bit für 20
+27	Bit für 40
+28	Paritüt Minute
 29	Stunde
-(Einer)	Bit f�r 1
-30	Bit f�r 2
-31	Bit f�r 4
-32	Bit f�r 8
+(Einer)	Bit für 1
+30	Bit für 2
+31	Bit für 4
+32	Bit für 8
 33	Stunde
-(Zehner)	Bit f�r 10
-34	Bit f�r 20
-35	Parit�t Stunde
+(Zehner)	Bit für 10
+34	Bit für 20
+35	Paritüt Stunde
 36	Kalendertag
-(Einer)	Bit f�r 1
-37	Bit f�r 2
-38	Bit f�r 4
-39	Bit f�r 8
+(Einer)	Bit für 1
+37	Bit für 2
+38	Bit für 4
+39	Bit für 8
 40	Kalendertag
-(Zehner)	Bit f�r 10
-41	Bit f�r 20
-42	Wochentag	Bit f�r 1
-43	Bit f�r 2
-44	Bit f�r 4
+(Zehner)	Bit für 10
+41	Bit für 20
+42	Wochentag	Bit für 1
+43	Bit für 2
+44	Bit für 4
 45	Monatsnummer
-(Einer)	Bit f�r 1
-46	Bit f�r 2
-47	Bit f�r 4
-48	Bit f�r 8
+(Einer)	Bit für 1
+46	Bit für 2
+47	Bit für 4
+48	Bit für 8
 49	Monatsnummer
-(Zehner)	Bit f�r 10
+(Zehner)	Bit für 10
 50	Jahr
-(Einer)	Bit f�r 1
-51	Bit f�r 2
-52	Bit f�r 4
-53	Bit f�r 8
+(Einer)	Bit für 1
+51	Bit für 2
+52	Bit für 4
+53	Bit für 8
 54	Jahr
-(Zehner)	Bit f�r 10
-55	Bit f�r 20
-56	Bit f�r 40
-57	Bit f�r 80
-58	Parit�t Datum*/
+(Zehner)	Bit für 10
+55	Bit für 20
+56	Bit für 40
+57	Bit für 80
+58	Paritüt Datum*/
 
 #include <stdbool.h>
 #include <string.h>
