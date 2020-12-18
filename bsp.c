@@ -75,8 +75,8 @@ static void uart_init(void)
 
 static void spi_init(void)
 {
-  SSPSTAT = 0b01000000;
-  SSPCON = 0b00100001;
+  SSPSTAT = 0b01000000; // transmit on rising edge of SCK
+  SSPCON = 0b00100001; // Enable Port, Mastzer Mode FOSC/16
   SSPIF = 0;
   SSPBUF = 0;
 }
