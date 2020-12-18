@@ -125,10 +125,9 @@ void new_bit(uint8_t bit_number, uint8_t value)
       break;
     case 28: 
       parity_minutes += value;
-      /* For an even parity, modulo 2, should be 0, so it is not true.
-      */
+      /* For an even parity, modulo 2, should be 0, so it is not true. */
       if (parity_minutes % 2)
-      { // paroty not even. mark value as invalid
+      { // parity not even. mark value as invalid
         tmp_time.minutes = UINT8_MAX;
       }
       break;
