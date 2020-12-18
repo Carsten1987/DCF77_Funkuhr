@@ -148,6 +148,7 @@ void main(void)
 {
   init();
   strcpy(buffer, "Initialization successfully done\n");
+  in = strlen(buffer);
   TXREG = buffer[out++];
   TXIE = 1;
   while(1)
@@ -173,6 +174,7 @@ void main(void)
       new_value = 0;
       new_bit(bit_counter++, 1);
     }
+#if 0
     if(!SSPIF)
     {
       // wait until transfer finished
@@ -202,6 +204,7 @@ void main(void)
         spi_buffer[10] = get_day_data(day_segment++, 1);
       }
     }
+#endif
   }
 }
 
