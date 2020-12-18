@@ -30,13 +30,12 @@ SOFTWARE.
 #include <stdint.h>
 #include <string.h>
 
+//#define PRINT_TIME
+
 #define IMPULS_0_MIN  40u
 #define IMPULS_0_MAX 130u
 #define IMPULS_1_MIN 140u
 #define IMPULS_1_MAX 230u
-
-#define SPI1_SWITCH_INTERVAL 16
-#define SPI2_SWITCH_INTERVAL 8
 
 static char buffer[40] = { 0 };
 static volatile uint8_t in = 0;
@@ -148,7 +147,7 @@ void main(void)
 {
   init();
   strcpy(buffer, "Initialization successfully done\n");
-  in = strlen(buffer);
+  in = (uint8_t)strlen(buffer);
   TXREG = buffer[out++];
   TXIE = 1;
   while(1)
@@ -159,10 +158,12 @@ void main(void)
       minute_gone(bit_counter);
       bit_counter = 0;
       get_time(&current_time);
+#ifdef PRINT_TIME
       make_time(&current_time);
       out = 0;
       TXREG = buffer[out++];
       TXIE = 1;
+#endif
     }
     if(new_value >= IMPULS_0_MIN && new_value <=  IMPULS_0_MAX)
     {
@@ -174,13 +175,10 @@ void main(void)
       new_value = 0;
       new_bit(bit_counter++, 1);
     }
-#if 0
-    if(!SSPIF)
+#ifndef PRINT_TIME
+    if(SSPIF) // wait until transmission completed
     {
-      // wait until transfer finished
-    }
-    else
-    {
+      WCOL = 0;
       SSPIF = 0;
       SSPBUF = spi_buffer[out_pos++];
       if(out_pos == sizeof(spi_buffer))
@@ -196,18 +194,26 @@ void main(void)
       {
         spi_buffer[6] = date_segment;
         spi_buffer[7] = get_date_data(date_segment++);
+        if(date_segment == 8)
+        {
+          date_segment = 0;
+        }
       }
       else if(out_pos == 0)
       {
         spi_buffer[8] = day_segment;
         spi_buffer[9] = get_day_data(day_segment, 0);
         spi_buffer[10] = get_day_data(day_segment++, 1);
+        if(day_segment == 3)
+        {
+          day_segment = 0;
+        }
       }
     }
 #endif
   }
 }
-
+#ifdef PRINT_TIME
 static void make_time(time *p_time)
 {
   in = 6;
@@ -230,7 +236,7 @@ static void make_time(time *p_time)
   buffer[in++] = p_time->minutes % 10 + '0';
   buffer[in++] = '\n';
 }
-
+#else
 static uint8_t get_date_data(uint8_t date_segment)
 {
   uint8_t value;
@@ -271,3 +277,4 @@ static uint8_t get_day_data(uint8_t day_segment, uint8_t byte)
 {
   return day_segment_coding[current_time.day_of_week - 1][day_segment][byte];
 }
+#endif
