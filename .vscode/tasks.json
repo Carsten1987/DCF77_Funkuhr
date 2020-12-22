@@ -43,7 +43,11 @@
             "args": [
                 "clean"
             ],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "label": "Program",
@@ -55,10 +59,11 @@
                 "-M",
                 "-Fdist/default/production/DCF77_Funkuhr.X.production.hex"
             ],
-            "dependsOn": [
-                "Build"
-            ],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
