@@ -42,7 +42,8 @@
             "command": "D:/Program Files/Microchip/MPLABX/v5.40/gnuBins/GnuWin32/bin/make.exe",
             "args": [
                 "clean"
-            ]
+            ],
+            "problemMatcher": []
         },
         {
             "label": "Program",
