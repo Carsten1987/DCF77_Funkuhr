@@ -47,7 +47,14 @@ static volatile uint16_t new_value = 0;
 static volatile uint16_t pause = 0;
 static volatile uint8_t bit_counter = 0;
 static volatile uint16_t milli_seconds = 0;
-static time current_time = { 0 };
+static time current_time = { 
+  .minutes = 0,
+  .hours = 0,
+  .day_of_week = 1,
+  .day = 1,
+  .month = 1,
+  .year = 20,
+ };
 #ifndef PRINT_TIME
 static uint8_t date_segment = 0;
 static uint8_t day_segment = 0;

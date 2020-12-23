@@ -339,6 +339,11 @@ void minute_gone(uint8_t bit_counter)
   {
     last_one.year = tmp_time.year;
   }
+
+  if(tmp_time.day_of_week != UINT8_MAX && (bit_counter == 59))
+  {
+    last_one.day_of_week = tmp_time.day_of_week;
+  }
 }
 
 /*
