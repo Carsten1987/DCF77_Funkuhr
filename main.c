@@ -31,6 +31,7 @@ SOFTWARE.
 #include <string.h>
 
 //#define PRINT_TIME
+#define SPI_TIME
 
 #define IMPULS_0_MIN  40u
 #define IMPULS_0_MAX 130u
@@ -64,7 +65,7 @@ static uint8_t out_pos = 0;
 
 #ifdef PRINT_TIME
 static void make_time(time *p_time);
-#else
+#endif
 static uint8_t get_date_data(uint8_t date_segment);
 static uint8_t get_day_data(uint8_t day_segment, uint8_t byte);
 
@@ -112,7 +113,6 @@ static const uint8_t day_segment_coding[7][3][2] =
     { 0x8c, 0x68 }
   }
 };
-#endif
 
 void __interrupt() isr()
 {
@@ -195,7 +195,7 @@ void main(void)
       new_value = 0;
       new_bit(bit_counter++, 1);
     }
-#ifndef PRINT_TIME
+#ifdef SPI_TIME
     if(SSPIF) // wait until transmission completed
     {
       WCOL = 0;
@@ -256,7 +256,8 @@ static void make_time(time *p_time)
   buffer[in++] = p_time->minutes % 10 + '0';
   buffer[in++] = '\n';
 }
-#else
+#endif
+#ifdef SPI_TIME
 static uint8_t get_date_data(uint8_t date_segment)
 {
   uint8_t value;
