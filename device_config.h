@@ -25,10 +25,6 @@ SOFTWARE.
 #ifndef DEVICE_CONFIG_H
 #define	DEVICE_CONFIG_H
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
 #pragma config CP = OFF
 #pragma config BOREN = ON
 #ifndef __DEBUG
@@ -39,9 +35,4 @@ extern "C" {
 #pragma config WDTE = OFF
 #pragma config FOSC = HS
 
-#ifdef	__cplusplus
-}
-#endif
-
 #endif	/* DEVICE_CONFIG_H */
-
