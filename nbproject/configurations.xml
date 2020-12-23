@@ -7,6 +7,8 @@
       <itemPath>device_config.h</itemPath>
       <itemPath>bsp.h</itemPath>
       <itemPath>dcf77_decoder.h</itemPath>
+      <itemPath>segment_display.h</itemPath>
+      <itemPath>print_date.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -18,6 +20,8 @@
       <itemPath>main.c</itemPath>
       <itemPath>bsp.c</itemPath>
       <itemPath>dcf77_decoder.c</itemPath>
+      <itemPath>segment_display.c</itemPath>
+      <itemPath>print_date.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

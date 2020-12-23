@@ -22,13 +22,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "device_config.h"
-#include "bsp.h"
-#include "dcf77_decoder.h"
 #include <xc.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include "bsp.h"
+#include "device_config.h"
+#include "dcf77_decoder.h"
+#include "segment_display.h"
+#include "print_date.h"
 
 #define PRINT_TIME
 #define SPI_TIME
@@ -67,57 +69,6 @@ static uint8_t day_segment = 0;
 static uint8_t spi_buffer[11] = { 0 };
 static uint8_t out_pos = 0;
 #endif
-
-#ifdef PRINT_TIME
-static void make_time(time *p_time);
-#endif
-static uint8_t get_date_data(uint8_t date_segment);
-static uint8_t get_day_data(uint8_t day_segment, uint8_t byte);
-
-static const uint8_t date_segment_coding[] =
-{
-  /*0*/63, /*1*/6, /*2*/91, /*3*/79,/*4*/102,
-  /*5*/109, /*6*/125, /*7*/7, /*8*/127, /*9*/111
-};
-
-static const uint8_t day_segment_coding[7][3][2] =
-{
-  { // MON
-    { 0x8c, 0x4c }, 
-    { 0x89, 0xcb }, 
-    { 0x8c, 0x68 }
-  },
-  { // dIN
-    { 0x90, 0xd9 },
-    { 0x22, 0x00 },
-    { 0x8c, 0x68 }
-  },
-  { // MIT
-    { 0x8c, 0x4c },
-    { 0x22, 0x00 },
-    { 0x23, 0x02 },
-  },
-  { // dON
-    { 0x90, 0xd9 },
-    { 0x89, 0xcb },
-    { 0x8c, 0x68 }
-  },
-  { // FRE
-    { 0x99, 0x02 },
-    { 0x99, 0x3a },
-    { 0x99, 0x83 },
-  },
-  { // SAM
-    { 0x19, 0xd3 },
-    { 0x99, 0x5f },
-    { 0x8c, 0x4c }
-  },
-  { // SON
-    { 0x19, 0xd3 },
-    { 0x89, 0xcb },
-    { 0x8c, 0x68 }
-  }
-};
 
 void __interrupt() isr()
 {
@@ -202,7 +153,7 @@ void main(void)
     {
       get_time(&current_time);
 #ifdef PRINT_TIME
-      make_time(&current_time);
+      in = make_time(buffer, &current_time);
       out = 0;
       TXREG = buffer[out++];
       TXIE = 1;
@@ -256,7 +207,7 @@ void main(void)
       else if(out_pos == 8)
       {
         spi_buffer[6] = date_segment;
-        spi_buffer[7] = get_date_data(date_segment++);
+        spi_buffer[7] = get_date_data(&current_time, date_segment++);
         if(date_segment == 8)
         {
           date_segment = 0;
@@ -265,8 +216,8 @@ void main(void)
       else if(out_pos == 0)
       {
         spi_buffer[8] = day_segment;
-        spi_buffer[9] = get_day_data(day_segment, 0);
-        spi_buffer[10] = get_day_data(day_segment++, 1);
+        spi_buffer[9] = get_day_data(&current_time, day_segment, 0);
+        spi_buffer[10] = get_day_data(&current_time, day_segment++, 1);
         if(day_segment == 3)
         {
           day_segment = 0;
@@ -276,96 +227,3 @@ void main(void)
 #endif
   }
 }
-#ifdef PRINT_TIME
-static void make_time(time *p_time)
-{
-  static const char week_day[7][3] = {
-    {
-      'M', 'O', 'N'
-    },
-    {
-      'D', 'I', 'E'
-    },
-    {
-      'M', 'I', 'T'
-    },
-    {
-      'D', 'O', 'N'
-    },
-    {
-      'F', 'R', 'R'
-    },
-    {
-      'S', 'A', 'M'
-    },
-    {
-      'S', 'O', 'N'
-    }
-  };
-  in = 6;
-  strcpy(buffer, "Time: ");
-  buffer[in++] = week_day[p_time->day_of_week - 1][0];
-  buffer[in++] = week_day[p_time->day_of_week - 1][1];
-  buffer[in++] = week_day[p_time->day_of_week - 1][2];
-  buffer[in++] = ' ';
-  buffer[in++] = p_time->day / 10 + '0';
-  buffer[in++] = p_time->day % 10 + '0';
-  buffer[in++] = '.';
-  buffer[in++] = p_time->month / 10 + '0';
-  buffer[in++] = p_time->month % 10 + '0';
-  buffer[in++] = '.';
-  buffer[in++] = '2';
-  buffer[in++] = '0';
-  buffer[in++] = p_time->year / 10 + '0';
-  buffer[in++] = p_time->year % 10 + '0';
-  buffer[in++] = ' ';
-  buffer[in++] = p_time->hours/ 10 + '0';
-  buffer[in++] = p_time->hours % 10 + '0';
-  buffer[in++] = ':';
-  buffer[in++] = p_time->minutes / 10 + '0';
-  buffer[in++] = p_time->minutes % 10 + '0';
-  buffer[in++] = '\n';
-}
-#endif
-#ifdef SPI_TIME
-static uint8_t get_date_data(uint8_t date_segment)
-{
-  uint8_t value;
-  switch (date_segment)
-  {
-    case 0:
-      value = date_segment_coding[current_time.day / 10];
-      break;
-    case 1:
-      value = date_segment_coding[current_time.day % 10] + 128; // +128 activates decimal point
-      break;
-    case 2:
-      value = date_segment_coding[current_time.month / 10];
-      break;
-    case 3:
-      value = date_segment_coding[current_time.month % 10] + 128; // +128 activates decimal point
-      break;
-    case 4:
-      value = date_segment_coding[current_time.year / 1000];
-      break;
-    case 5:
-      value = date_segment_coding[current_time.year / 100];
-      break;
-    case 6:
-      value = date_segment_coding[current_time.year / 10];
-      break;
-    case 7:
-      value = date_segment_coding[current_time.year % 10];
-      break;
-    default:
-      value = 0;
-      break;
-  }
-  return value;
-}
-
-static uint8_t get_day_data(uint8_t day_segment, uint8_t byte)
-{
-  return day_segment_coding[current_time.day_of_week - 1][day_segment][byte];
-}
-#endif
