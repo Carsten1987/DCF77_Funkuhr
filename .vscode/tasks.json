@@ -57,6 +57,7 @@
                 "-TPPK4",
                 "-P16F73",
                 "-M",
+                "-OL",
                 "-Fdist/default/production/DCF77_Funkuhr.X.production.hex"
             ],
             "problemMatcher": [],
