@@ -197,11 +197,11 @@ void new_bit(uint8_t bit_number, uint8_t value)
       parity_date += value;
       break;
     case 43:
-      tmp_time.day_of_week = 2 * value;
+      tmp_time.day_of_week += 2 * value;
       parity_date += value;
       break;
     case 44:
-      tmp_time.day_of_week = 4 * value;
+      tmp_time.day_of_week += 4 * value;
       parity_date += value;
       break;
     case 45:
@@ -346,12 +346,12 @@ void minute_gone(uint8_t bit_counter)
     }
   }
   
-  if(tmp_time.year != UINT8_MAX && (bit_counter == 59))
+  if((tmp_time.year != UINT8_MAX) && (bit_counter == 59))
   {
     last_one.year = tmp_time.year;
   }
 
-  if(tmp_time.day_of_week != UINT8_MAX && (bit_counter == 59))
+  if((tmp_time.day_of_week != UINT8_MAX) && (bit_counter == 59))
   {
     last_one.day_of_week = tmp_time.day_of_week;
   }
