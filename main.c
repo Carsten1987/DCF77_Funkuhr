@@ -48,6 +48,7 @@ static volatile uint16_t new_value = 0;
 static volatile uint16_t pause = 0;
 static volatile uint8_t bit_counter = 0;
 static volatile uint16_t milli_seconds = 0;
+static volatile uint8_t seconds = 0;
 static time current_time = { 
   .minutes = 0,
   .hours = 0,
@@ -161,6 +162,7 @@ void __interrupt() isr()
 
 void main(void)
 {
+  bool new_time = false;
   init();
 #ifdef PRINT_TIME
   strcpy(buffer, "Initialization successfully done\n");
@@ -177,6 +179,23 @@ void main(void)
       pause = 0;
       minute_gone(bit_counter);
       bit_counter = 0;
+      milli_seconds = 0;
+      seconds = 0;
+      new_time = true;
+    }
+    if(milli_seconds == 1000)
+    {
+      milli_seconds = 0;
+      seconds++;
+    }
+    if(seconds == 60)
+    {
+      seconds = 0;
+      minute_gone(0);
+      new_time = true;
+    }
+    if(new_time)
+    {
       get_time(&current_time);
 #ifdef PRINT_TIME
       make_time(&current_time);
@@ -184,6 +203,7 @@ void main(void)
       TXREG = buffer[out++];
       TXIE = 1;
 #endif
+      new_time = false;
     }
     if(new_value >= IMPULS_0_MIN && new_value <=  IMPULS_0_MAX)
     {
@@ -236,8 +256,35 @@ void main(void)
 #ifdef PRINT_TIME
 static void make_time(time *p_time)
 {
+  static const char week_day[7][3] = {
+    {
+      'M', 'O', 'N'
+    },
+    {
+      'D', 'I', 'E'
+    },
+    {
+      'M', 'I', 'T'
+    },
+    {
+      'D', 'O', 'N'
+    },
+    {
+      'F', 'R', 'R'
+    },
+    {
+      'S', 'A', 'M'
+    },
+    {
+      'S', 'O', 'N'
+    }
+  };
   in = 6;
   strcpy(buffer, "Time: ");
+  buffer[in++] = week_day[p_time->day_of_week - 1][0];
+  buffer[in++] = week_day[p_time->day_of_week - 1][1];
+  buffer[in++] = week_day[p_time->day_of_week - 1][2];
+  buffer[in++] = ' ';
   buffer[in++] = p_time->day / 10 + '0';
   buffer[in++] = p_time->day % 10 + '0';
   buffer[in++] = '.';
@@ -263,33 +310,33 @@ static uint8_t get_date_data(uint8_t date_segment)
   uint8_t value;
   switch (date_segment)
   {
-  case 0:
-    value = date_segment_coding[current_time.day / 10];
-    break;
-  case 1:
-    value = date_segment_coding[current_time.day % 10] + 128; // +128 activates decimal point
-    break;
-  case 2:
-    value = date_segment_coding[current_time.month / 10];
-    break;
-  case 3:
-    value = date_segment_coding[current_time.month % 10] + 128; // +128 activates decimal point
-    break;
-  case 4:
-    value = date_segment_coding[current_time.year / 1000];
-    break;
-  case 5:
-    value = date_segment_coding[current_time.year / 100];
-    break;
-  case 6:
-    value = date_segment_coding[current_time.year / 10];
-    break;
-  case 7:
-    value = date_segment_coding[current_time.year % 10];
-    break;
-  default:
-    value = 0;
-    break;
+    case 0:
+      value = date_segment_coding[current_time.day / 10];
+      break;
+    case 1:
+      value = date_segment_coding[current_time.day % 10] + 128; // +128 activates decimal point
+      break;
+    case 2:
+      value = date_segment_coding[current_time.month / 10];
+      break;
+    case 3:
+      value = date_segment_coding[current_time.month % 10] + 128; // +128 activates decimal point
+      break;
+    case 4:
+      value = date_segment_coding[current_time.year / 1000];
+      break;
+    case 5:
+      value = date_segment_coding[current_time.year / 100];
+      break;
+    case 6:
+      value = date_segment_coding[current_time.year / 10];
+      break;
+    case 7:
+      value = date_segment_coding[current_time.year % 10];
+      break;
+    default:
+      value = 0;
+      break;
   }
   return value;
 }
