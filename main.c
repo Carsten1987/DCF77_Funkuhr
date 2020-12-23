@@ -37,21 +37,27 @@ SOFTWARE.
 #define IMPULS_1_MIN 140u
 #define IMPULS_1_MAX 230u
 
+#ifdef PRINT_TIME
 static char buffer[40] = { 0 };
 static volatile uint8_t in = 0;
 static volatile uint8_t out = 0;
+#endif
 static volatile uint16_t ms_counter = 0;
 static volatile uint16_t new_value = 0;
 static volatile uint16_t pause = 0;
 static volatile uint8_t bit_counter = 0;
 static volatile uint16_t milli_seconds = 0;
+static time current_time = { 0 };
+#ifndef PRINT_TIME
 static uint8_t date_segment = 0;
 static uint8_t day_segment = 0;
-static time current_time = { 0 };
 static uint8_t spi_buffer[11] = { 0 };
 static uint8_t out_pos = 0;
+#endif
 
+#ifdef PRINT_TIME
 static void make_time(time *p_time);
+#else
 static uint8_t get_date_data(uint8_t date_segment);
 static uint8_t get_day_data(uint8_t day_segment, uint8_t byte);
 
@@ -99,6 +105,7 @@ static const uint8_t day_segment_coding[7][3][2] =
     { 0x8c, 0x68 }
   }
 };
+#endif
 
 void __interrupt() isr()
 {
@@ -114,6 +121,7 @@ void __interrupt() isr()
   { // received UART char
     /* code */
   }
+#ifdef PRINT_TIME
   if(TXIF && TXIE)
   { // tx buffer empty. Next char can be send
     TXREG = buffer[out++];
@@ -126,6 +134,7 @@ void __interrupt() isr()
       TXIE = 0;
     }
   }
+#endif
   if(INTF)
   { // RBO Interrupt detected
     INTF = 0;
@@ -146,10 +155,14 @@ void __interrupt() isr()
 void main(void)
 {
   init();
+#ifdef PRINT_TIME
   strcpy(buffer, "Initialization successfully done\n");
   in = (uint8_t)strlen(buffer);
   TXREG = buffer[out++];
   TXIE = 1;
+#else
+  TXREG = 'I';
+#endif
   while(1)
   {
     if(pause > 1000)
