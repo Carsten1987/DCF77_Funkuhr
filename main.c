@@ -30,7 +30,7 @@ SOFTWARE.
 #include <stdint.h>
 #include <string.h>
 
-//#define PRINT_TIME
+#define PRINT_TIME
 #define SPI_TIME
 
 #define IMPULS_0_MIN  40u
@@ -56,7 +56,7 @@ static time current_time = {
   .month = 1,
   .year = 20,
  };
-#ifndef PRINT_TIME
+#ifdef SPI_TIME
 static uint8_t date_segment = 0;
 static uint8_t day_segment = 0;
 static uint8_t spi_buffer[11] = { 0 };
