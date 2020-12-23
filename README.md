@@ -3,9 +3,9 @@
 
 ## PIN Configuraiton
 RB0 - DCF77  
-RB2 - Enable Day-of-weel
-RB3 - Enable Date
-RB4 - Enable Time
+RB2 - Enable Day-of-week  
+RB3 - Enable Date  
+RB4 - Enable Time  
 RB6 - Programmer  
 RB7 - Programmer  
 RC6 - TX (9600 Baud, 8N1)  
