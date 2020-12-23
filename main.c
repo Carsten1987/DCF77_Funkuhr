@@ -33,6 +33,10 @@ SOFTWARE.
 #define PRINT_TIME
 #define SPI_TIME
 
+#define PIN_DOF  RB2
+#define PIN_DATE RB3
+#define PIN_TIME RB4
+
 #define IMPULS_0_MIN  40u
 #define IMPULS_0_MAX 130u
 #define IMPULS_1_MIN 140u
@@ -220,6 +224,21 @@ void main(void)
     {
       WCOL = 0;
       SSPIF = 0;
+      if(out_pos == 0)
+      {
+        PIN_DOF = 0;
+        PIN_TIME = 1;
+      }
+      else if(out_pos == 6)
+      {
+        PIN_TIME = 0;
+        PIN_DATE = 1;
+      }
+      else if(out_pos == 8)
+      {
+        PIN_DATE = 0;
+        PIN_DOF = 1;
+      }
       SSPBUF = spi_buffer[out_pos++];
       if(out_pos == sizeof(spi_buffer))
       {
@@ -230,7 +249,11 @@ void main(void)
         6-7  = Datum
         8-10 = Tag
       */
-      if(out_pos == 8)
+      if(out_pos == 6)
+      {
+        //tbd time to SPI Buffer
+      }
+      else if(out_pos == 8)
       {
         spi_buffer[6] = date_segment;
         spi_buffer[7] = get_date_data(date_segment++);
