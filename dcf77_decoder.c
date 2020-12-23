@@ -86,7 +86,14 @@ static const uint8_t max_days[] =
 };
 
 static time tmp_time;
-static time last_one;
+static time last_one = { 
+  .minutes = 0,
+  .hours = 0,
+  .day_of_week = 1,
+  .day = 1,
+  .month = 1,
+  .year = 20,
+};
 static uint8_t parity_minutes;
 static uint8_t parity_hours;
 static uint8_t parity_date;
