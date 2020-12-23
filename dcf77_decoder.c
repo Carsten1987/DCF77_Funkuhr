@@ -75,7 +75,6 @@ Bit	Bedeutung
 58	Paritüt Datum*/
 
 #include <stdbool.h>
-#include <string.h>
 #include "dcf77_decoder.h"
 
 #define DCF77_TIME_START_BIT 20u
@@ -276,7 +275,12 @@ void new_bit(uint8_t bit_number, uint8_t value)
 
 void get_time(time *p_time)
 {
-  memcpy(p_time, &last_one, sizeof(last_one));
+  p_time->day         = last_one.day;
+  p_time->day_of_week = last_one.day_of_week;
+  p_time->hours       = last_one.hours;
+  p_time->minutes     = last_one.minutes;
+  p_time->month       = last_one.month;
+  p_time->year        = last_one.year;
 }
 
 void minute_gone(uint8_t bit_counter)
