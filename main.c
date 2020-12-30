@@ -142,14 +142,12 @@ void main(void)
     {
       milli_seconds = 0;
       seconds++;
-      TXREG = '.';
     }
     if(seconds == 60)
     {
       seconds = 0;
       minute_gone(0);
       new_time = true;
-      TXREG = '\n';
     }
     if(new_time)
     {
