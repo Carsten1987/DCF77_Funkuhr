@@ -97,28 +97,29 @@ uint8_t get_date_data(time *p_time, uint8_t date_segment)
     switch (date_segment)
     {
       case 0:
-        value = date_segment_coding[p_time->day / 10];
+        value = date_segment_coding[p_time->year % 10];
         break;
       case 1:
-        value = date_segment_coding[p_time->day % 10] + 128; // +128 activates decimal point
-        break;
-      case 2:
-        value = date_segment_coding[p_time->month / 10];
-        break;
-      case 3:
-        value = date_segment_coding[p_time->month % 10] + 128; // +128 activates decimal point
-        break;
-      case 4:
-        value = date_segment_coding[p_time->year / 1000];
-        break;
-      case 5:
-        value = date_segment_coding[p_time->year / 100];
-        break;
-      case 6:
         value = date_segment_coding[p_time->year / 10];
         break;
+      // first to segments have to be hard coded, because DCF77 only delivers last two digets
+      case 2:
+        value = date_segment_coding[0];
+        break;
+      case 3:
+        value = date_segment_coding[2];
+        break;
+      case 4:
+        value = date_segment_coding[p_time->month % 10] + 128; // +128 activates decimal point
+        break;
+      case 5:
+        value = date_segment_coding[p_time->month / 10];
+        break;
+      case 6:
+        value = date_segment_coding[p_time->day % 10] + 128; // +128 activates decimal point
+        break;
       case 7:
-        value = date_segment_coding[p_time->year % 10];
+        value = date_segment_coding[p_time->day / 10];
         break;
       default:
         value = 0;

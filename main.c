@@ -61,7 +61,7 @@ static time current_time = {
   .day_of_week = 1,
   .day = 1,
   .month = 1,
-  .year = 20,
+  .year = 21,
  };
 #ifdef SPI_TIME
 static uint8_t date_segment = 0;
@@ -177,18 +177,18 @@ void main(void)
       SSPIF = 0;
       if(out_pos == 0)
       {
-        PIN_DOF = 0;
-        PIN_TIME = 1;
+        PIN_DOF = 1;
+        PIN_TIME = 0;
       }
       else if(out_pos == 6)
       {
-        PIN_TIME = 0;
-        PIN_DATE = 1;
+        PIN_TIME = 1;
+        PIN_DATE = 0;
       }
       else if(out_pos == 8)
       {
-        PIN_DATE = 0;
-        PIN_DOF = 1;
+        PIN_DATE = 1;
+        PIN_DOF = 0;
       }
       SSPBUF = spi_buffer[out_pos++];
       if(out_pos == sizeof(spi_buffer))
@@ -206,7 +206,7 @@ void main(void)
       }
       else if(out_pos == 8)
       {
-        spi_buffer[6] = date_segment;
+        spi_buffer[6] = (uint8_t)(1u << date_segment);
         spi_buffer[7] = get_date_data(&current_time, date_segment++);
         if(date_segment == 8)
         {
