@@ -138,16 +138,18 @@ void main(void)
       seconds = 0;
       new_time = true;
     }
-    if(milli_seconds == 1000)
+    if(milli_seconds >= 1000)
     {
       milli_seconds = 0;
       seconds++;
+      TXREG = '.';
     }
     if(seconds == 60)
     {
       seconds = 0;
       minute_gone(0);
       new_time = true;
+      TXREG = '\n';
     }
     if(new_time)
     {
