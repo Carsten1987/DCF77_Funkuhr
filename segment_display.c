@@ -79,7 +79,7 @@ static const uint8_t day_segment_coding[7][3][2] =
   },
   { // SAM
     { 0x19, 0xd3 },
-    { 0x99, 0x5f },
+    { 0x99, 0x5a },
     { 0x8c, 0x4c }
   },
   { // SON
