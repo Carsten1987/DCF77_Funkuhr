@@ -25,6 +25,25 @@ SOFTWARE.
 #include <stdio.h>
 #include "segment_display.h"
 
+/* 
+ *  AAA
+ * F   B
+ * F   B
+ *  GGG
+ * E   C
+ * E   C
+ *  DDD
+ * 
+ * Bit 0: A
+ * Bit 1: B
+ * Bit 2: C
+ * Bit 3: D
+ * Bit 4: E
+ * Bit 5: F
+ * Bit 6: G
+ * Bit 7: DP
+ */
+
 static const uint8_t date_segment_coding[] =
 {
   /*0*/63, /*1*/6, /*2*/91, /*3*/79,/*4*/102,
