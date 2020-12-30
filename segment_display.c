@@ -102,7 +102,7 @@ uint8_t get_date_data(time *p_time, uint8_t date_segment)
       case 1:
         value = date_segment_coding[p_time->year / 10];
         break;
-      // first to segments have to be hard coded, because DCF77 only delivers last two digets
+      // first two segments have to be hard coded, because DCF77 only delivers last two digets
       case 2:
         value = date_segment_coding[0];
         break;
