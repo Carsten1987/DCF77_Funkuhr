@@ -136,7 +136,7 @@ uint8_t get_day_data(time *p_time, uint8_t day_segment, uint8_t byte)
   {
     if((p_time->day_of_week > 0)  && (p_time->day_of_week < 8))
     {
-      if((day_segment < 7) && (byte < 2))
+      if((day_segment < 3) && (byte < 2))
       {
         data = day_segment_coding[p_time->day_of_week - 1][day_segment][byte];
       }

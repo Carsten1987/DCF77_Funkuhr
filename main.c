@@ -61,7 +61,7 @@ static time current_time = {
   .day_of_week = 1,
   .day = 1,
   .month = 1,
-  .year = 21,
+  .year = 20,
  };
 #ifdef SPI_TIME
 static uint8_t date_segment = 0;
@@ -215,7 +215,7 @@ void main(void)
       }
       else if(out_pos == 0)
       {
-        spi_buffer[8] = day_segment;
+        spi_buffer[8] = (uint8_t)(1u << day_segment);
         spi_buffer[9] = get_day_data(&current_time, day_segment, 0);
         spi_buffer[10] = get_day_data(&current_time, day_segment++, 1);
         if(day_segment == 3)
