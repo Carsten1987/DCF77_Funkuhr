@@ -184,7 +184,7 @@ uint8_t get_time_data(time *p_time, uint8_t time_segment)
       case 1:
         if(p_time->hours < 24u)
         {
-          data = time_coding[p_time->hours % 10u] + 1;
+          data = time_coding[p_time->hours % 10u] + 1; // +1 add decimal point
         }
         break;
       case 2:
@@ -196,7 +196,7 @@ uint8_t get_time_data(time *p_time, uint8_t time_segment)
       case 3:
         if(p_time->minutes < 60u)
         {
-          data = time_coding[p_time->minutes % 10u] + 1;
+          data = time_coding[p_time->minutes % 10u] + 1; // +1 add decimal point
         }
         break;
       default:
