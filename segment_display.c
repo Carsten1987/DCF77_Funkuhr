@@ -43,7 +43,6 @@ SOFTWARE.
  * Bit 6: G
  * Bit 7: DP
  */
-
 static const uint8_t date_segment_coding[] =
 {
   /*0*/63, /*1*/6, /*2*/91, /*3*/79,/*4*/102,
@@ -87,6 +86,30 @@ static const uint8_t day_segment_coding[7][3][2] =
     { 0x89, 0xcb },
     { 0x8c, 0x68 }
   }
+};
+
+/* 
+ *  AAA
+ * F   B
+ * F   B
+ *  GGG
+ * E   C
+ * E   C
+ *  DDD
+ * 
+ * Bit 0: DP
+ * Bit 1: C
+ * Bit 2: D
+ * Bit 3: E
+ * Bit 4: B
+ * Bit 5: A
+ * Bit 6: G
+ * Bit 7: F
+ */
+static const uint8_t time_coding[] =
+{  
+  /*0*/190, /*1*/18, /*2*/124, /*3*/118,/*4*/210,
+  /*5*/230, /*6*/238, /*7*/50, /*8*/254, /*9*/246
 };
 
 uint8_t get_date_data(time *p_time, uint8_t date_segment)
@@ -140,6 +163,61 @@ uint8_t get_day_data(time *p_time, uint8_t day_segment, uint8_t byte)
       {
         data = day_segment_coding[p_time->day_of_week - 1][day_segment][byte];
       }
+    }
+  }
+  return data;
+}
+
+uint8_t get_time_data(time *p_time, uint8_t time_segment)
+{
+  uint8_t data = 0;
+  if(p_time != NULL)
+  {
+    switch (time_segment)
+    {
+      case 0:
+        if((p_time->hours > 10u) && (p_time->hours < 24u))
+        {
+          data = time_coding[p_time->hours / 10u];
+        }
+        break;
+      case 1:
+        if(p_time->hours < 24u)
+        {
+          data = time_coding[p_time->hours % 10u] + 1;
+        }
+        break;
+      case 2:
+        if(p_time->minutes < 60u)
+        {
+          data = time_coding[p_time->minutes / 10u];
+        }
+        break;
+      case 3:
+        if(p_time->minutes < 60u)
+        {
+          data = time_coding[p_time->minutes % 10u] + 1;
+        }
+        break;
+      default:
+        break;
+    }
+  }
+  return  data;
+}
+
+uint8_t get_time_data_seconds(uint8_t seconds, uint8_t time_segment)
+{
+  uint8_t data = 0;
+  if(seconds < 60)
+  {
+    if(time_segment == 4)
+    {
+      data = time_coding[seconds / 10u];
+    }
+    else if(time_segment == 5)
+    {
+      data = time_coding[seconds % 10u];
     }
   }
   return data;

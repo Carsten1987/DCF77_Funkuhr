@@ -202,7 +202,12 @@ void main(void)
       */
       if(out_pos == 6)
       {
-        //tbd time to SPI Buffer
+        spi_buffer[0] = get_time_data(&current_time, 0);
+        spi_buffer[1] = get_time_data(&current_time, 1);
+        spi_buffer[2] = get_time_data(&current_time, 2);
+        spi_buffer[3] = get_time_data(&current_time, 3);
+        spi_buffer[4] = get_time_data_seconds(seconds, 4);
+        spi_buffer[5] = get_time_data_seconds(seconds, 5);
       }
       else if(out_pos == 8)
       {

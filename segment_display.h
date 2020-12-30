@@ -30,5 +30,7 @@ SOFTWARE.
 
 uint8_t get_date_data(time *p_time, uint8_t date_segment);
 uint8_t get_day_data(time *p_time, uint8_t day_segment, uint8_t byte);
+uint8_t get_time_data(time *p_time, uint8_t time_segment);
+uint8_t get_time_data_seconds(uint8_t seconds, uint8_t time_segment);
 
 #endif	/* SEGMENT_DISPLAY_H */
