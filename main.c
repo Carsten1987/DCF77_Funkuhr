@@ -35,9 +35,11 @@ SOFTWARE.
 #define PRINT_TIME
 #define SPI_TIME
 
-#define PIN_DOF  RB2
-#define PIN_DATE RB3
-#define PIN_TIME RB4
+#define PIN_OUTPUT_ENABLE RB1
+#define PIN_DOF           RB2
+#define PIN_DATE          RB3
+#define PIN_TIME          RB4
+#define PIN_CLAER_SR      RB5
 
 #define IMPULS_0_MIN  40u
 #define IMPULS_0_MAX 130u
@@ -119,6 +121,8 @@ void main(void)
 {
   bool new_time = false;
   init();
+  PIN_OUTPUT_ENABLE = 0; // enable all  outputs
+  PIN_CLAER_SR = 1; // do not clear SRs
 #ifdef PRINT_TIME
   strcpy(buffer, "Initialization successfully done\n");
   in = (uint8_t)strlen(buffer);
