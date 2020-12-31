@@ -106,7 +106,7 @@ static const uint8_t day_segment_coding[7][3][2] =
  * Bit 6: G
  * Bit 7: F
  */
-static const uint8_t time_coding[] =
+static const uint8_t time_segment_coding[] =
 {  
   /*0*/190, /*1*/18, /*2*/124, /*3*/118,/*4*/210,
   /*5*/230, /*6*/238, /*7*/50, /*8*/254, /*9*/246
@@ -178,25 +178,25 @@ uint8_t get_time_data(time *p_time, uint8_t time_segment)
       case 0:
         if((p_time->hours > 10u) && (p_time->hours < 24u))
         {
-          data = time_coding[p_time->hours / 10u];
+          data = time_segment_coding[p_time->hours / 10u];
         }
         break;
       case 1:
         if(p_time->hours < 24u)
         {
-          data = time_coding[p_time->hours % 10u] + 1; // +1 add decimal point
+          data = time_segment_coding[p_time->hours % 10u] + 1; // +1 add decimal point
         }
         break;
       case 2:
         if(p_time->minutes < 60u)
         {
-          data = time_coding[p_time->minutes / 10u];
+          data = time_segment_coding[p_time->minutes / 10u];
         }
         break;
       case 3:
         if(p_time->minutes < 60u)
         {
-          data = time_coding[p_time->minutes % 10u] + 1; // +1 add decimal point
+          data = time_segment_coding[p_time->minutes % 10u] + 1; // +1 add decimal point
         }
         break;
       default:
@@ -213,11 +213,11 @@ uint8_t get_time_data_seconds(uint8_t seconds, uint8_t time_segment)
   {
     if(time_segment == 4)
     {
-      data = time_coding[seconds / 10u];
+      data = time_segment_coding[seconds / 10u];
     }
     else if(time_segment == 5)
     {
-      data = time_coding[seconds % 10u];
+      data = time_segment_coding[seconds % 10u];
     }
   }
   return data;
