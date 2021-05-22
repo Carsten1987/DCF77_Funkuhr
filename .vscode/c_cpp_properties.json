@@ -4,20 +4,20 @@
             "name": "Windows",
             "includePath": [
                 "${workspaceFolder}",
-                "D:/Program Files/Microchip/xc8/v2.30/pic/include/*",
-                "D:/Program Files/Microchip/xc8/v2.30/pic/include/c99/*",
-                "D:/Program Files/Microchip/xc8/v2.30/pic/include/legacy/*",
-                "D:/Program Files/Microchip/xc8/v2.30/pic/include/proc/*"
+                "D:/Program Files/Microchip/xc8/v2.32/pic/include/*",
+                "D:/Program Files/Microchip/xc8/v2.32/pic/include/c99/*",
+                "D:/Program Files/Microchip/xc8/v2.32/pic/include/legacy/*",
+                "D:/Program Files/Microchip/xc8/v2.32/pic/include/proc/*"
             ],
             "defines": ["__XC8", "__PICC__", "__interrupt()=/**/", "__bit()=/**/", "__at(x)=/**/", "BANKMASK", "_16F73"],
             "intelliSenseMode": "clang-x64",
             "browse": {
                 "path": [
                     "${workspaceFolder}",
-                    "D:/Program Files/Microchip/xc8/v2.30/pic/include/*",
-                    "D:/Program Files/Microchip/xc8/v2.30/pic/include/c99/*",
-                    "D:/Program Files/Microchip/xc8/v2.30/pic/include/legacy/*",
-                    "D:/Program Files/Microchip/xc8/v2.30/pic/include/proc/*"
+                    "D:/Program Files/Microchip/xc8/v2.32/pic/include/*",
+                    "D:/Program Files/Microchip/xc8/v2.32/pic/include/c99/*",
+                    "D:/Program Files/Microchip/xc8/v2.32/pic/include/legacy/*",
+                    "D:/Program Files/Microchip/xc8/v2.32/pic/include/proc/*"
                 ],
                 "databaseFilename": "",
                 "limitSymbolsToIncludedHeaders": true
