@@ -52,27 +52,27 @@ static const char week_day[7][3] = {
 uint8_t make_time(char buffer[], time *p_time)
 {
   uint8_t written_bytes = 6;
-  strcpy(buffer, "Time: ");
-  buffer[written_bytes++] = week_day[p_time->day_of_week - 1][0];
-  buffer[written_bytes++] = week_day[p_time->day_of_week - 1][1];
-  buffer[written_bytes++] = week_day[p_time->day_of_week - 1][2];
+  (void)strcpy(buffer, "Time: ");
+  buffer[written_bytes++] = week_day[p_time->day_of_week - 1u][0];
+  buffer[written_bytes++] = week_day[p_time->day_of_week - 1u][1];
+  buffer[written_bytes++] = week_day[p_time->day_of_week - 1u][2];
   buffer[written_bytes++] = ' ';
-  buffer[written_bytes++] = p_time->day / 10 + '0';
-  buffer[written_bytes++] = p_time->day % 10 + '0';
+  buffer[written_bytes++] = (p_time->day / 10u) + '0';
+  buffer[written_bytes++] = (p_time->day % 10u) + '0';
   buffer[written_bytes++] = '.';
-  buffer[written_bytes++] = p_time->month / 10 + '0';
-  buffer[written_bytes++] = p_time->month % 10 + '0';
+  buffer[written_bytes++] = (p_time->month / 10u) + '0';
+  buffer[written_bytes++] = (p_time->month % 10u) + '0';
   buffer[written_bytes++] = '.';
   buffer[written_bytes++] = '2';
   buffer[written_bytes++] = '0';
-  buffer[written_bytes++] = p_time->year / 10 + '0';
-  buffer[written_bytes++] = p_time->year % 10 + '0';
+  buffer[written_bytes++] = (p_time->year / 10u) + '0';
+  buffer[written_bytes++] = (p_time->year % 10u) + '0';
   buffer[written_bytes++] = ' ';
-  buffer[written_bytes++] = p_time->hours/ 10 + '0';
-  buffer[written_bytes++] = p_time->hours % 10 + '0';
+  buffer[written_bytes++] = (p_time->hours/ 10u) + '0';
+  buffer[written_bytes++] = (p_time->hours % 10u) + '0';
   buffer[written_bytes++] = ':';
-  buffer[written_bytes++] = p_time->minutes / 10 + '0';
-  buffer[written_bytes++] = p_time->minutes % 10 + '0';
+  buffer[written_bytes++] = (p_time->minutes / 10u) + '0';
+  buffer[written_bytes++] = (p_time->minutes % 10u) + '0';
   buffer[written_bytes++] = '\n';
   return written_bytes;
 }

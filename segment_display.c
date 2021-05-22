@@ -114,38 +114,38 @@ static const uint8_t time_segment_coding[] =
 
 uint8_t get_date_data(time *p_time, uint8_t date_segment)
 {
-  uint8_t value = 0;
+  uint8_t value = 0u;
   if(p_time != NULL)
   {
     switch (date_segment)
     {
-      case 0:
-        value = date_segment_coding[p_time->year % 10];
+      case 0u:
+        value = date_segment_coding[p_time->year % 10u];
         break;
-      case 1:
-        value = date_segment_coding[p_time->year / 10];
+      case 1u:
+        value = date_segment_coding[p_time->year / 10u];
         break;
       // first two segments have to be hard coded, because DCF77 only delivers last two digets
-      case 2:
-        value = date_segment_coding[0];
+      case 2u:
+        value = date_segment_coding[0u];
         break;
-      case 3:
-        value = date_segment_coding[2];
+      case 3u:
+        value = date_segment_coding[2u];
         break;
-      case 4:
-        value = date_segment_coding[p_time->month % 10] + 128; // +128 activates decimal point
+      case 4u:
+        value = date_segment_coding[p_time->month % 10u] + 128u; // +128 activates decimal point
         break;
-      case 5:
-        value = date_segment_coding[p_time->month / 10];
+      case 5u:
+        value = date_segment_coding[p_time->month / 10u];
         break;
-      case 6:
-        value = date_segment_coding[p_time->day % 10] + 128; // +128 activates decimal point
+      case 6u:
+        value = date_segment_coding[p_time->day % 10u] + 128u; // +128 activates decimal point
         break;
-      case 7:
-        value = date_segment_coding[p_time->day / 10];
+      case 7u:
+        value = date_segment_coding[p_time->day / 10u];
         break;
       default:
-        value = 0;
+        value = 0u;
         break;
     }
   }
@@ -154,14 +154,14 @@ uint8_t get_date_data(time *p_time, uint8_t date_segment)
 
 uint8_t get_day_data(time *p_time, uint8_t day_segment, uint8_t byte)
 {
-  uint8_t data = 0;
+  uint8_t data = 0u;
   if(p_time != NULL)
   {
-    if((p_time->day_of_week > 0)  && (p_time->day_of_week < 8))
+    if((p_time->day_of_week > 0u)  && (p_time->day_of_week < 8u))
     {
-      if((day_segment < 3) && (byte < 2))
+      if((day_segment < 3u) && (byte < 2u))
       {
-        data = day_segment_coding[p_time->day_of_week - 1][day_segment][byte];
+        data = day_segment_coding[p_time->day_of_week - 1u][day_segment][byte];
       }
     }
   }
@@ -184,7 +184,7 @@ uint8_t get_time_data(time *p_time, uint8_t time_segment)
       case 1:
         if(p_time->hours < 24u)
         {
-          data = time_segment_coding[p_time->hours % 10u] + 1; // +1 add decimal point
+          data = time_segment_coding[p_time->hours % 10u] + 1u; // +1 add decimal point
         }
         break;
       case 2:
@@ -196,7 +196,7 @@ uint8_t get_time_data(time *p_time, uint8_t time_segment)
       case 3:
         if(p_time->minutes < 60u)
         {
-          data = time_segment_coding[p_time->minutes % 10u] + 1; // +1 add decimal point
+          data = time_segment_coding[p_time->minutes % 10u] + 1u; // +1 add decimal point
         }
         break;
       default:
@@ -208,16 +208,20 @@ uint8_t get_time_data(time *p_time, uint8_t time_segment)
 
 uint8_t get_time_data_seconds(uint8_t seconds, uint8_t time_segment)
 {
-  uint8_t data = 0;
-  if(seconds < 60)
+  uint8_t data = 0u;
+  if(seconds < 60u)
   {
-    if(time_segment == 4)
+    if(time_segment == 4u)
     {
       data = time_segment_coding[seconds / 10u];
     }
-    else if(time_segment == 5)
+    else if(time_segment == 5u)
     {
       data = time_segment_coding[seconds % 10u];
+    }
+    else
+    {
+      // no valid segment
     }
   }
   return data;

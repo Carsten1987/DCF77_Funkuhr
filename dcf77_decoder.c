@@ -102,163 +102,163 @@ void new_bit(uint8_t bit_number, uint8_t value)
   switch(bit_number)
   {
     case 21:
-      tmp_time.minutes = 1 * value;
+      tmp_time.minutes = 1u * value;
       parity_minutes = value;
       break;
     case 22:
-      tmp_time.minutes += 2 * value;
+      tmp_time.minutes += 2u * value;
       parity_minutes += value;
       break;
     case 23: 
-      tmp_time.minutes += 4 * value;
+      tmp_time.minutes += 4u * value;
       parity_minutes += value;
       break;
     case 24:
-      tmp_time.minutes += 8 * value;
+      tmp_time.minutes += 8u * value;
       parity_minutes += value;
       break;
     case 25:
-      tmp_time.minutes += 10 * value;
+      tmp_time.minutes += 10u * value;
       parity_minutes += value;
       break;
     case 26:
-      tmp_time.minutes += 20 * value;
+      tmp_time.minutes += 20u * value;
       parity_minutes += value;
       break;
     case 27:
-      tmp_time.minutes += 40 * value;
+      tmp_time.minutes += 40u * value;
       parity_minutes += value;
       break;
     case 28: 
       parity_minutes += value;
       /* For an even parity, modulo 2, should be 0, so it is not true. */
-      if (parity_minutes % 2)
+      if (parity_minutes % 2u)
       { // parity not even. mark value as invalid
         tmp_time.minutes = UINT8_MAX;
       }
       break;
     case 29: 
-      tmp_time.hours = 1 * value;
+      tmp_time.hours = 1u * value;
       parity_hours = value;
       break;
     case 30:
-      tmp_time.hours += 2 * value;
+      tmp_time.hours += 2u * value;
       parity_hours += value;
       break;
     case 31:
-      tmp_time.hours += 4 * value;
+      tmp_time.hours += 4u * value;
       parity_hours += value;
       break;
     case 32:
-      tmp_time.hours += 8 * value;
+      tmp_time.hours += 8u * value;
       parity_hours += value;
       break;
     case 33:
-      tmp_time.hours += 10 * value;
+      tmp_time.hours += 10u * value;
       parity_hours += value;
       break;
     case 34:
-      tmp_time.hours += 20 * value;
+      tmp_time.hours += 20u * value;
       parity_hours += value;
       break;
     case 35: 
       parity_hours += value;
-      if(parity_hours % 2)
+      if(parity_hours % 2u)
       {
         tmp_time.hours = UINT8_MAX;
       }
       break;
     case 36: 
-      tmp_time.day = 1 * value;
+      tmp_time.day = 1u * value;
       parity_date = value;
       break;
     case 37:
-      tmp_time.day += 2 * value;
+      tmp_time.day += 2u * value;
       parity_date += value;
       break;
     case 38:
-      tmp_time.day += 4 * value;
+      tmp_time.day += 4u * value;
       parity_date += value;
       break;
     case 39:
-      tmp_time.day += 8 * value;
+      tmp_time.day += 8u * value;
       parity_date += value;
       break;
     case 40:
-      tmp_time.day += 10 * value;
+      tmp_time.day += 10u * value;
       parity_date += value;
       break;
     case 41:
-      tmp_time.day += 20 * value;
+      tmp_time.day += 20u * value;
       parity_date += value;
       break;
     case 42:
-      tmp_time.day_of_week = 1 * value;
+      tmp_time.day_of_week = 1u * value;
       parity_date += value;
       break;
     case 43:
-      tmp_time.day_of_week += 2 * value;
+      tmp_time.day_of_week += 2u * value;
       parity_date += value;
       break;
     case 44:
-      tmp_time.day_of_week += 4 * value;
+      tmp_time.day_of_week += 4u * value;
       parity_date += value;
       break;
     case 45:
-      tmp_time.month = 1 * value;
+      tmp_time.month = 1u * value;
       parity_date += value;
       break;
     case 46: 
-      tmp_time.month += 2 * value;
+      tmp_time.month += 2u * value;
       parity_date += value;
       break;
     case 47: 
-      tmp_time.month += 4 * value;
+      tmp_time.month += 4u * value;
       parity_date += value;
       break;
     case 48:
-      tmp_time.month += 8 * value;
+      tmp_time.month += 8u * value;
       parity_date += value; 
       break;
     case 49:
-      tmp_time.month += 10 * value;
+      tmp_time.month += 10u * value;
       parity_date += value;
       break;
     case 50: 
-      tmp_time.year = 1 * value;
+      tmp_time.year = 1u * value;
       parity_date += value;
       break;
     case 51: 
-      tmp_time.year += 2 * value;
+      tmp_time.year += 2u * value;
       parity_date += value;
       break;
     case 52:
-      tmp_time.year += 4 * value;
+      tmp_time.year += 4u * value;
       parity_date += value;
       break;
     case 53:
-      tmp_time.year += 8 * value;
+      tmp_time.year += 8u * value;
       parity_date += value;
       break;
     case 54:
-      tmp_time.year += 10 * value;
+      tmp_time.year += 10u * value;
       parity_date += value;
       break;
     case 55:
-      tmp_time.year += 20 * value;
+      tmp_time.year += 20u * value;
       parity_date += value;
       break;
     case 56:
-      tmp_time.year += 40 * value;
+      tmp_time.year += 40u * value;
       parity_date += value;
       break;
     case 57:
-      tmp_time.year += 80 * value; 
+      tmp_time.year += 80u * value; 
       parity_date += value;
       break;
     case 58:
       parity_date += value;
-      if(parity_date % 2)
+      if(parity_date % 2u)
       {
         tmp_time.day = UINT8_MAX;
         tmp_time.month = UINT8_MAX;
@@ -285,43 +285,43 @@ void get_time(time *p_time)
 
 void minute_gone(uint8_t bit_counter)
 {
-  if((tmp_time.minutes != UINT8_MAX) && (bit_counter == 59))
+  if((tmp_time.minutes != UINT8_MAX) && (bit_counter == 59u))
   {
     last_one.minutes = tmp_time.minutes;
   }
   else
   {
     last_one.minutes++;
-    if(last_one.minutes == 60)
+    if(last_one.minutes == 60u)
     {
-      last_one.minutes = 0;
+      last_one.minutes = 0u;
       last_one.hours++;
     }
   }
   
-  if((tmp_time.hours != UINT8_MAX) && (bit_counter == 59))
+  if((tmp_time.hours != UINT8_MAX) && (bit_counter == 59u))
   {
     last_one.hours = tmp_time.hours;
   }
   else
   {
-    if(last_one.hours == 24)
+    if(last_one.hours == 24u)
     {
-      last_one.hours = 0;
+      last_one.hours = 0u;
       last_one.day++;
     }
   }
 
-  if(tmp_time.day != UINT8_MAX && (bit_counter == 59))
+  if((tmp_time.day != UINT8_MAX) && (bit_counter == 59u))
   {
     last_one.day = tmp_time.day;
   }
   else
   {
-    if(last_one.month > 0)
+    if(last_one.month > 0u)
     {
-      uint8_t threshold = max_days[last_one.month - 1];
-      if((last_one.month == 2) && (last_one.year % 4 == 0))
+      uint8_t threshold = max_days[last_one.month - 1u];
+      if((last_one.month == 2u) && ((last_one.year % 4u) == 0u))
       {
         threshold++;
       }
@@ -333,25 +333,25 @@ void minute_gone(uint8_t bit_counter)
     }
   }
   
-  if((tmp_time.month != UINT8_MAX) && (bit_counter == 59))
+  if((tmp_time.month != UINT8_MAX) && (bit_counter == 59u))
   {
     last_one.month = tmp_time.month;
   }
   else
   {
-    if(last_one.month == 13)
+    if(last_one.month == 13u)
     {
-      last_one.month = 1;
+      last_one.month = 1u;
       last_one.year++;
     }
   }
   
-  if((tmp_time.year != UINT8_MAX) && (bit_counter == 59))
+  if((tmp_time.year != UINT8_MAX) && (bit_counter == 59u))
   {
     last_one.year = tmp_time.year;
   }
 
-  if((tmp_time.day_of_week != UINT8_MAX) && (bit_counter == 59))
+  if((tmp_time.day_of_week != UINT8_MAX) && (bit_counter == 59u))
   {
     last_one.day_of_week = tmp_time.day_of_week;
   }

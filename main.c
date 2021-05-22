@@ -124,7 +124,7 @@ void main(void)
   PIN_OUTPUT_ENABLE = 0; // enable all  outputs
   PIN_CLAER_SR = 1; // do not clear SRs
 #ifdef PRINT_TIME
-  strcpy(buffer, "Initialization successfully done\n");
+  (void)strcpy(buffer, "Initialization successfully done\n");
   in = (uint8_t)strlen(buffer);
   TXREG = buffer[out++];
   TXIE = 1;
@@ -133,24 +133,24 @@ void main(void)
 #endif
   while(1)
   {
-    if(pause > 1000)
+    if(pause > 1000u)
     {
-      pause = 0;
+      pause = 0u;
       minute_gone(bit_counter);
-      bit_counter = 0;
-      milli_seconds = 0;
-      seconds = 0;
+      bit_counter = 0u;
+      milli_seconds = 0u;
+      seconds = 0u;
       new_time = true;
     }
-    if(milli_seconds >= 1000)
+    if(milli_seconds >= 1000u)
     {
-      milli_seconds = 0;
+      milli_seconds = 0u;
       seconds++;
     }
-    if(seconds == 60)
+    if(seconds == 60u)
     {
-      seconds = 0;
-      minute_gone(0);
+      seconds = 0u;
+      minute_gone(0u);
       new_time = true;
     }
     if(new_time)
@@ -158,41 +158,49 @@ void main(void)
       get_time(&current_time);
 #ifdef PRINT_TIME
       in = make_time(buffer, &current_time);
-      out = 0;
+      out = 0u;
       TXREG = buffer[out++];
-      TXIE = 1;
+      TXIE = 1u;
 #endif
       new_time = false;
     }
-    if(new_value >= IMPULS_0_MIN && new_value <=  IMPULS_0_MAX)
+    if((new_value >= IMPULS_0_MIN) && (new_value <=  IMPULS_0_MAX))
     {
-      new_value = 0;
-      new_bit(bit_counter++, 0);
+      new_value = 0u;
+      new_bit(bit_counter++, 0u);
     }
-    else if(new_value >= IMPULS_1_MIN && new_value <= IMPULS_1_MAX)
+    else if((new_value >= IMPULS_1_MIN) && (new_value <= IMPULS_1_MAX))
     {
-      new_value = 0;
-      new_bit(bit_counter++, 1);
+      new_value = 0u;
+      new_bit(bit_counter++, 1u);
+    }
+    else
+    {
+      // do nothing
     }
 #ifdef SPI_TIME
     if(SSPIF) // wait until transmission completed
     {
-      WCOL = 0;
-      SSPIF = 0;
-      if(out_pos == 0)
+      WCOL = 0u;
+      SSPIF = 0u;
+      if(out_pos == 0u)
       {
-        PIN_DOF = 1;
-        PIN_TIME = 0;
+        PIN_DOF = 1u;
+        PIN_TIME = 0u;
       }
-      else if(out_pos == 6)
+      else if(out_pos == 6u)
       {
         PIN_TIME = 1;
         PIN_DATE = 0;
       }
-      else if(out_pos == 8)
+      else if(out_pos == 8u)
       {
-        PIN_DATE = 1;
-        PIN_DOF = 0;
+        PIN_DATE = 1u;
+        PIN_DOF = 0u;
+      }
+      else
+      {
+        // do nothing
       }
       SSPBUF = spi_buffer[out_pos++];
       if(out_pos == sizeof(spi_buffer))
@@ -204,33 +212,37 @@ void main(void)
         6-7  = Datum
         8-10 = Tag
       */
-      if(out_pos == 6)
+      if(out_pos == 6u)
       {
-        spi_buffer[0] = get_time_data(&current_time, 0);
-        spi_buffer[1] = get_time_data(&current_time, 1);
-        spi_buffer[2] = get_time_data(&current_time, 2);
-        spi_buffer[3] = get_time_data(&current_time, 3);
-        spi_buffer[4] = get_time_data_seconds(seconds, 4);
-        spi_buffer[5] = get_time_data_seconds(seconds, 5);
+        spi_buffer[0] = get_time_data(&current_time, 0u);
+        spi_buffer[1] = get_time_data(&current_time, 1u);
+        spi_buffer[2] = get_time_data(&current_time, 2u);
+        spi_buffer[3] = get_time_data(&current_time, 3u);
+        spi_buffer[4] = get_time_data_seconds(seconds, 4u);
+        spi_buffer[5] = get_time_data_seconds(seconds, 5u);
       }
-      else if(out_pos == 8)
+      else if(out_pos == 8u)
       {
         spi_buffer[6] = (uint8_t)(1u << date_segment);
         spi_buffer[7] = get_date_data(&current_time, date_segment++);
-        if(date_segment == 8)
+        if(date_segment == 8u)
         {
-          date_segment = 0;
+          date_segment = 0u;
         }
       }
-      else if(out_pos == 0)
+      else if(out_pos == 0u)
       {
         spi_buffer[8] = (uint8_t)(1u << day_segment);
-        spi_buffer[9] = get_day_data(&current_time, day_segment, 0);
-        spi_buffer[10] = get_day_data(&current_time, day_segment++, 1);
-        if(day_segment == 3)
+        spi_buffer[9] = get_day_data(&current_time, day_segment, 0u);
+        spi_buffer[10] = get_day_data(&current_time, day_segment++, 1u);
+        if(day_segment == 3u)
         {
-          day_segment = 0;
+          day_segment = 0u;
         }
+      }
+      else
+      {
+        // do nothing
       }
     }
 #endif
