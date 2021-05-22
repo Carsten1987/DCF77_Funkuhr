@@ -6,7 +6,7 @@
         {
             "label": "Build",
             "type": "process",
-            "command": "D:/Program Files/Microchip/MPLABX/v5.40/gnuBins/GnuWin32/bin/make.exe",
+            "command": "D:/Program Files/Microchip/MPLABX/v5.45/gnuBins/GnuWin32/bin/make.exe",
             "args": [
                 "-j12",
                 "all"
@@ -39,7 +39,7 @@
         {
             "label": "Clean",
             "type": "process",
-            "command": "D:/Program Files/Microchip/MPLABX/v5.40/gnuBins/GnuWin32/bin/make.exe",
+            "command": "D:/Program Files/Microchip/MPLABX/v5.45/gnuBins/GnuWin32/bin/make.exe",
             "args": [
                 "clean"
             ],
@@ -52,7 +52,7 @@
         {
             "label": "Program",
             "type": "process",
-            "command": "D:\\Program Files\\Microchip\\MPLABX\\v5.40\\mplab_platform\\mplab_ipe\\ipecmd.exe",
+            "command": "D:\\Program Files\\Microchip\\MPLABX\\v5.45\\mplab_platform\\mplab_ipe\\ipecmd.exe",
             "args": [
                 "-TPPK4",
                 "-P16F73",
