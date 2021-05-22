@@ -94,7 +94,7 @@ MP_PROCESSOR_OPTION=16F73
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.p1.d 
 	@${RM} ${OBJECTDIR}/main.p1 
@@ -102,7 +102,7 @@ ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/bsp.p1: bsp.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/bsp.p1: bsp.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/bsp.p1.d 
 	@${RM} ${OBJECTDIR}/bsp.p1 
@@ -110,7 +110,7 @@ ${OBJECTDIR}/bsp.p1: bsp.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/bsp.d ${OBJECTDIR}/bsp.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/bsp.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/dcf77_decoder.p1: dcf77_decoder.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/dcf77_decoder.p1: dcf77_decoder.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/dcf77_decoder.p1.d 
 	@${RM} ${OBJECTDIR}/dcf77_decoder.p1 
@@ -118,7 +118,7 @@ ${OBJECTDIR}/dcf77_decoder.p1: dcf77_decoder.c  nbproject/Makefile-${CND_CONF}.m
 	@-${MV} ${OBJECTDIR}/dcf77_decoder.d ${OBJECTDIR}/dcf77_decoder.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/dcf77_decoder.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/segment_display.p1: segment_display.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/segment_display.p1: segment_display.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/segment_display.p1.d 
 	@${RM} ${OBJECTDIR}/segment_display.p1 
@@ -126,7 +126,7 @@ ${OBJECTDIR}/segment_display.p1: segment_display.c  nbproject/Makefile-${CND_CON
 	@-${MV} ${OBJECTDIR}/segment_display.d ${OBJECTDIR}/segment_display.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/segment_display.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/print_date.p1: print_date.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/print_date.p1: print_date.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/print_date.p1.d 
 	@${RM} ${OBJECTDIR}/print_date.p1 
@@ -135,7 +135,7 @@ ${OBJECTDIR}/print_date.p1: print_date.c  nbproject/Makefile-${CND_CONF}.mk
 	@${FIXDEPS} ${OBJECTDIR}/print_date.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 else
-${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.p1.d 
 	@${RM} ${OBJECTDIR}/main.p1 
@@ -143,7 +143,7 @@ ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/main.d ${OBJECTDIR}/main.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/main.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/bsp.p1: bsp.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/bsp.p1: bsp.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/bsp.p1.d 
 	@${RM} ${OBJECTDIR}/bsp.p1 
@@ -151,7 +151,7 @@ ${OBJECTDIR}/bsp.p1: bsp.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/bsp.d ${OBJECTDIR}/bsp.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/bsp.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/dcf77_decoder.p1: dcf77_decoder.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/dcf77_decoder.p1: dcf77_decoder.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/dcf77_decoder.p1.d 
 	@${RM} ${OBJECTDIR}/dcf77_decoder.p1 
@@ -159,7 +159,7 @@ ${OBJECTDIR}/dcf77_decoder.p1: dcf77_decoder.c  nbproject/Makefile-${CND_CONF}.m
 	@-${MV} ${OBJECTDIR}/dcf77_decoder.d ${OBJECTDIR}/dcf77_decoder.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/dcf77_decoder.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/segment_display.p1: segment_display.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/segment_display.p1: segment_display.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/segment_display.p1.d 
 	@${RM} ${OBJECTDIR}/segment_display.p1 
@@ -167,7 +167,7 @@ ${OBJECTDIR}/segment_display.p1: segment_display.c  nbproject/Makefile-${CND_CON
 	@-${MV} ${OBJECTDIR}/segment_display.d ${OBJECTDIR}/segment_display.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/segment_display.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/print_date.p1: print_date.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/print_date.p1: print_date.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/print_date.p1.d 
 	@${RM} ${OBJECTDIR}/print_date.p1 
