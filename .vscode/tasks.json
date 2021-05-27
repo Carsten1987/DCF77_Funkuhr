@@ -8,7 +8,7 @@
             "type": "process",
             "command": "D:/Program Files/Microchip/MPLABX/v5.45/gnuBins/GnuWin32/bin/make.exe",
             "args": [
-                "-j12",
+                "-j16",
                 "all"
             ],
             "problemMatcher": [
