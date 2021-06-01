@@ -1,34 +1,10 @@
-#     build                    build a specific configuration
-#     clean                    remove built files from a configuration
-#     clobber                  remove all built files
-#     all                      build all configurations
-#     help                     print help mesage
-#  
-#  Targets .build-impl, .clean-impl, .clobber-impl, .all-impl, and
-#  .help-impl are implemented in nbproject/makefile-impl.mk.
-#
-#  Available make variables:
-#
-#     CND_BASEDIR                base directory for relative paths
-#     CND_DISTDIR                default top distribution directory (build artifacts)
-#     CND_BUILDDIR               default top build directory (object files, ...)
-#     CONF                       name of current configuration
-#     CND_ARTIFACT_DIR_${CONF}   directory of build artifact (current configuration)
-#     CND_ARTIFACT_NAME_${CONF}  name of build artifact (current configuration)
-#     CND_ARTIFACT_PATH_${CONF}  path to build artifact (current configuration)
-#     CND_PACKAGE_DIR_${CONF}    directory of package (current configuration)
-#     CND_PACKAGE_NAME_${CONF}   name of package (current configuration)
-#     CND_PACKAGE_PATH_${CONF}   path to package (current configuration)
-#
-# NOCDDL
-
 # Environment 
 MKDIR=gnumkdir -p
 RM=rm -f 
 MV=mv 
 CP=cp 
 
-MP_CC="D:\Program Files\Microchip\xc8\v2.32\bin\xc8-cc.exe"
+MP_CC=xc8-cc.exe
 
 NAME := DCF77_Funkuhr
 OUT_DIR := Output
@@ -36,6 +12,8 @@ OUT_DIR := Output
 CPU := 16F73
 
 DIRS := .
+
+INC :=
 
 CFLAGS += -O0
 CFLAGS := -mcpu=$(CPU)
