@@ -32,18 +32,28 @@ SOFTWARE.
 #include "segment_display.h"
 #include "print_date.h"
 
+// Print Time via UART
 #define PRINT_TIME
+// Load Time via SPI to connected Displays
 #define SPI_TIME
-
+// Pin for Output-Enable of Shift-Registers
 #define PIN_OUTPUT_ENABLE RB1
+// Pin for Loading Day-Of-Week-Data
 #define PIN_DOF           RB2
+// Pin for Loading Date-Data
 #define PIN_DATE          RB3
+// Pin for Loading Time-Data
 #define PIN_TIME          RB4
+// Pin for Clear Shift Register
 #define PIN_CLAER_SR      RB5
 
-#define IMPULS_0_MIN  40u
+// Minimal time for 0 Pulse in ms
+#define IMPULS_0_MIN  40u 
+// Maximal time for 0 Pulse in ms
 #define IMPULS_0_MAX 130u
+// Minimal time for 1 Pulse in ms
 #define IMPULS_1_MIN 140u
+// Maximal time for 1 Pulse in ms
 #define IMPULS_1_MAX 230u
 
 #ifdef PRINT_TIME
@@ -133,8 +143,9 @@ void main(void)
 #endif
   while(1)
   {
+    // check if Bit 59 is detected (Bit 59 missing)
     if(pause > 1000u)
-    {
+    { // Start new Sequence
       pause = 0u;
       minute_gone(bit_counter);
       bit_counter = 0u;
@@ -143,18 +154,18 @@ void main(void)
       new_time = true;
     }
     if(milli_seconds >= 1000u)
-    {
+    { 
       milli_seconds = 0u;
       seconds++;
     }
     if(seconds == 60u)
-    {
+    { // No signal detected. Do Manual Minute counting
       seconds = 0u;
       minute_gone(0u);
       new_time = true;
     }
     if(new_time)
-    {
+    { // Read out new Time from DCF77 Module
       get_time(&current_time);
 #ifdef PRINT_TIME
       in = make_time(buffer, &current_time);
@@ -164,6 +175,7 @@ void main(void)
 #endif
       new_time = false;
     }
+    // check length of Pulse and store information
     if((new_value >= IMPULS_0_MIN) && (new_value <=  IMPULS_0_MAX))
     {
       new_value = 0u;
