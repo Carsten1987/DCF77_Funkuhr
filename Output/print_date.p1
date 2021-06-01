@@ -1,0 +1,144 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"32 ./dcf77_decoder.h
+[; ;./dcf77_decoder.h: 32: {
+[s S1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
+[n S1 . minutes hours day_of_week day month year ]
+"37 D:\Program Files\Microchip\xc8\v2.32\pic\include\c90\string.h
+[; ;D:\Program Files\Microchip\xc8\v2.32\pic\include\c90\string.h: 37: extern char * strcpy(char *, const char *);
+[v _strcpy `(*uc ~T0 @X0 0 ef2`*uc`*Cuc ]
+[v F134 `Cuc ~T0 @X0 -> 3 `i t ]
+"28 print_date.c
+[; ;print_date.c: 28: static const char week_day[7][3] = {
+[v _week_day `F134 ~T0 @X0 -> 7 `i s ]
+[i _week_day
+:U ..
+:U ..
+-> -> 77 `ui `uc
+-> -> 79 `ui `uc
+-> -> 78 `ui `uc
+..
+:U ..
+-> -> 68 `ui `uc
+-> -> 73 `ui `uc
+-> -> 69 `ui `uc
+..
+:U ..
+-> -> 77 `ui `uc
+-> -> 73 `ui `uc
+-> -> 84 `ui `uc
+..
+:U ..
+-> -> 68 `ui `uc
+-> -> 79 `ui `uc
+-> -> 78 `ui `uc
+..
+:U ..
+-> -> 70 `ui `uc
+-> -> 82 `ui `uc
+-> -> 82 `ui `uc
+..
+:U ..
+-> -> 83 `ui `uc
+-> -> 65 `ui `uc
+-> -> 77 `ui `uc
+..
+:U ..
+-> -> 83 `ui `uc
+-> -> 79 `ui `uc
+-> -> 78 `ui `uc
+..
+..
+]
+"52
+[; ;print_date.c: 52: uint8_t make_time(char buffer[], time *p_time)
+[v _make_time `(uc ~T0 @X0 1 ef2`*uc`*S1 ]
+"53
+[; ;print_date.c: 53: {
+{
+[e :U _make_time ]
+"52
+[; ;print_date.c: 52: uint8_t make_time(char buffer[], time *p_time)
+[v _buffer `*uc ~T0 @X0 1 r1 ]
+[v _p_time `*S1 ~T0 @X0 1 r2 ]
+"53
+[; ;print_date.c: 53: {
+[f ]
+"54
+[; ;print_date.c: 54:   uint8_t written_bytes = 6;
+[v _written_bytes `uc ~T0 @X0 1 a ]
+[e = _written_bytes -> -> 6 `i `uc ]
+"55
+[; ;print_date.c: 55:   (void)strcpy(buffer, "Time: ");
+[e ( _strcpy (2 , _buffer :s 1C ]
+"56
+[; ;print_date.c: 56:   buffer[written_bytes++] = week_day[p_time->day_of_week - 1u][0];
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux *U + &U *U + &U _week_day * -> - -> . *U _p_time 2 `ui -> 1 `ui `ux -> * -> # *U &U *U &U _week_day `ui -> -> 3 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _week_day * -> - -> . *U _p_time 2 `ui -> 1 `ui `ux -> * -> # *U &U *U &U _week_day `ui -> -> 3 `i `ui `ux `ui `ux ]
+"57
+[; ;print_date.c: 57:   buffer[written_bytes++] = week_day[p_time->day_of_week - 1u][1];
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux *U + &U *U + &U _week_day * -> - -> . *U _p_time 2 `ui -> 1 `ui `ux -> * -> # *U &U *U &U _week_day `ui -> -> 3 `i `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U &U *U + &U _week_day * -> - -> . *U _p_time 2 `ui -> 1 `ui `ux -> * -> # *U &U *U &U _week_day `ui -> -> 3 `i `ui `ux `ui `ux ]
+"58
+[; ;print_date.c: 58:   buffer[written_bytes++] = week_day[p_time->day_of_week - 1u][2];
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux *U + &U *U + &U _week_day * -> - -> . *U _p_time 2 `ui -> 1 `ui `ux -> * -> # *U &U *U &U _week_day `ui -> -> 3 `i `ui `ux * -> -> -> 2 `i `ui `ux -> -> # *U &U *U + &U _week_day * -> - -> . *U _p_time 2 `ui -> 1 `ui `ux -> * -> # *U &U *U &U _week_day `ui -> -> 3 `i `ui `ux `ui `ux ]
+"59
+[; ;print_date.c: 59:   buffer[written_bytes++] = ' ';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> -> 32 `ui `uc ]
+"60
+[; ;print_date.c: 60:   buffer[written_bytes++] = (p_time->day / 10u) + '0';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> + / -> . *U _p_time 3 `ui -> 10 `ui -> 48 `ui `uc ]
+"61
+[; ;print_date.c: 61:   buffer[written_bytes++] = (p_time->day % 10u) + '0';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> + % -> . *U _p_time 3 `ui -> 10 `ui -> 48 `ui `uc ]
+"62
+[; ;print_date.c: 62:   buffer[written_bytes++] = '.';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> -> 46 `ui `uc ]
+"63
+[; ;print_date.c: 63:   buffer[written_bytes++] = (p_time->month / 10u) + '0';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> + / -> . *U _p_time 4 `ui -> 10 `ui -> 48 `ui `uc ]
+"64
+[; ;print_date.c: 64:   buffer[written_bytes++] = (p_time->month % 10u) + '0';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> + % -> . *U _p_time 4 `ui -> 10 `ui -> 48 `ui `uc ]
+"65
+[; ;print_date.c: 65:   buffer[written_bytes++] = '.';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> -> 46 `ui `uc ]
+"66
+[; ;print_date.c: 66:   buffer[written_bytes++] = '2';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> -> 50 `ui `uc ]
+"67
+[; ;print_date.c: 67:   buffer[written_bytes++] = '0';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> -> 48 `ui `uc ]
+"68
+[; ;print_date.c: 68:   buffer[written_bytes++] = (p_time->year / 10u) + '0';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> + / -> . *U _p_time 5 `ui -> 10 `ui -> 48 `ui `uc ]
+"69
+[; ;print_date.c: 69:   buffer[written_bytes++] = (p_time->year % 10u) + '0';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> + % -> . *U _p_time 5 `ui -> 10 `ui -> 48 `ui `uc ]
+"70
+[; ;print_date.c: 70:   buffer[written_bytes++] = ' ';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> -> 32 `ui `uc ]
+"71
+[; ;print_date.c: 71:   buffer[written_bytes++] = (p_time->hours/ 10u) + '0';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> + / -> . *U _p_time 1 `ui -> 10 `ui -> 48 `ui `uc ]
+"72
+[; ;print_date.c: 72:   buffer[written_bytes++] = (p_time->hours % 10u) + '0';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> + % -> . *U _p_time 1 `ui -> 10 `ui -> 48 `ui `uc ]
+"73
+[; ;print_date.c: 73:   buffer[written_bytes++] = ':';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> -> 58 `ui `uc ]
+"74
+[; ;print_date.c: 74:   buffer[written_bytes++] = (p_time->minutes / 10u) + '0';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> + / -> . *U _p_time 0 `ui -> 10 `ui -> 48 `ui `uc ]
+"75
+[; ;print_date.c: 75:   buffer[written_bytes++] = (p_time->minutes % 10u) + '0';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> + % -> . *U _p_time 0 `ui -> 10 `ui -> 48 `ui `uc ]
+"76
+[; ;print_date.c: 76:   buffer[written_bytes++] = '\n';
+[e = *U + _buffer * -> ++ _written_bytes -> -> 1 `i `uc `ux -> -> # *U _buffer `ui `ux -> -> 10 `ui `uc ]
+"77
+[; ;print_date.c: 77:   return written_bytes;
+[e ) _written_bytes ]
+[e $UE 2  ]
+"78
+[; ;print_date.c: 78: }
+[e :UE 2 ]
+}
+[a 1C 84 105 109 101 58 32 0 ]
