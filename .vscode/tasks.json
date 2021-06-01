@@ -58,7 +58,7 @@
                 "-P16F73",
                 "-M",
                 "-OL",
-                "-Fdist/default/production/DCF77_Funkuhr.X.production.hex"
+                "-FOutput/DCF77_Funkuhr.hex"
             ],
             "problemMatcher": [],
             "group": {
