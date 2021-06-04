@@ -20,8 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# Environment 
-MKDIR=gnumkdir -p
+# Environment
+ifeq ($(OS),Windows_NT)
+	MKDIR=gnumkdir -p
+else
+	MKDIR=mkdir -p
+endif
 RM=rm -f 
 MV=mv 
 CP=cp 
