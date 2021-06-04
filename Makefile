@@ -26,7 +26,7 @@ RM=rm -f
 MV=mv 
 CP=cp 
 
-MP_CC=xc8-cc.exe
+MP_CC=xc8-cc
 
 NAME := DCF77_Funkuhr
 OUT_DIR := Output
