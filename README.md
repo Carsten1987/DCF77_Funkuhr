@@ -17,7 +17,5 @@ RC7 - RX (unused at the moment)
 RC5 - SPI-TX  
 RC3 - SPI-CLK  
 
-## Example images of all three Displays
-<img src="images/Time.jpg" width="600" height="480" />  
-<img src="images/Date.jpg" width="600" height="480" />  
-<img src="images/DayOfWeek.jpg" width="600" height="480" />  
+## Example Front View with Time only
+<img src="images/Front_WIP.jpg" width="600" height="480"  /> 
