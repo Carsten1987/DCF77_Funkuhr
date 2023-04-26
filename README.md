@@ -17,5 +17,5 @@ RC7 - RX (unused at the moment)
 RC5 - SPI-TX  
 RC3 - SPI-CLK  
 
-## Example Front View with Time only
-<img src="images/Front_WIP.jpg" width="600" height="480"  /> 
+## Example Front View
+<img src="images/Front.jpg" width="600" height="480"  /> 
