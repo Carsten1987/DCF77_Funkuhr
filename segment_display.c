@@ -176,7 +176,7 @@ uint8_t get_time_data(time *p_time, uint8_t time_segment)
     switch (time_segment)
     {
       case 0:
-        if((p_time->hours > 10u) && (p_time->hours < 24u))
+        if((p_time->hours >= 10u) && (p_time->hours < 24u))
         {
           data = time_segment_coding[p_time->hours / 10u];
         }
