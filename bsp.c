@@ -37,7 +37,7 @@ void init(void)
   init_timer_1();
 
   INTE = 1; // RB0 ISR enabled
-  INTEDG = 0; // rising edge
+  INTEDG = 0; // falling edge
   RCIE = 1; // UART Receive ISR enabled
   TMR1IE = 1; // Timer 1 ISR enabled
   PEIE = 1; // Peripherial ISR enabled
